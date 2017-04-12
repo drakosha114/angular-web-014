@@ -24,6 +24,7 @@ var NotesList = (function () {
         }
         var note = { text: this.text };
         this.addNote(note);
+        this.text = '';
     };
     NotesList.prototype.readNotes = function () {
         var _this = this;
@@ -36,14 +37,14 @@ var NotesList = (function () {
             .toPromise()
             .then(function (response) { return response.json(); });
     };
-    NotesList.prototype.removeNote = function (_id) {
+    NotesList.prototype.removeNote = function (id) {
         var _this = this;
         var params = new http_1.URLSearchParams();
-        params.set('id', _id);
+        params.set('id', id);
         this.http.delete(this.notesUrl, { search: params })
             .toPromise()
             .then(function (response) {
-            console.log("note with id " + _id + " removed, response", response);
+            console.log("note with id " + id + " removed, response", response);
             _this.readNotes();
         });
     };

@@ -42,6 +42,7 @@ export class NotesList{
         }
         let note = { text: this.text }
         this.addNote(note);
+        this.text = '';
     }
 
     readNotes() {
@@ -56,14 +57,14 @@ export class NotesList{
             .then(response => response.json() as Note[]);
     }
 
-    removeNote(_id:string) {
+    removeNote(id:string) {
         let params: URLSearchParams = new URLSearchParams();
-        params.set('id', _id);
+        params.set('id', id);
         this.http.delete(this.notesUrl, { search: params })
             .toPromise()
             .then(response => {
                 console.log(
-                    `note with id ${_id} removed, response`, response);
+                    `note with id ${id} removed, response`, response);
                 this.readNotes();
             });
     }
