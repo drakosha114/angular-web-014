@@ -14,14 +14,14 @@ interface Note {
                 <textarea class="notes___create__textarea" [(ngModel)]="text" ></textarea>
             </div>
             <div class="notes___create__row">
-                <button class="notes___create__button" type="button" (click)="addNote()">Add</button>
+                <button [disabled]="!text" class="notes___create__button" type="button" (click)="add()">Add</button>
             </div>
         </div>
         <ul class="notes__list">
             <li *ngFor="let note of notes " class="notes__item">
                 <div class="notes__item__text"> {{note.text}}</div>
                 <div class="notes__item__button">
-                    <button type="button" (click)="removeNote(note.id)" ></button>
+                    <button type="button" (click)="removeNote(note._id)" >delete</button>
                 </div>
             </li>
         </ul>
@@ -36,11 +36,17 @@ export class NotesList{
     constructor(private http: Http) {
         this.readNotes();
     }
+    add() {
+        if (!this.text) {
+            return;
+        }
+        let note = { text: this.text }
+        this.addNote(note);
+    }
 
     readNotes() {
         this.getNotes().then(notes=>{
             this.notes=notes;
-            console.log(notes);
         });
     }
 
@@ -50,14 +56,14 @@ export class NotesList{
             .then(response => response.json() as Note[]);
     }
 
-    removeNote(id:string) {
+    removeNote(_id:string) {
         let params: URLSearchParams = new URLSearchParams();
-        params.set('id', id);
+        params.set('id', _id);
         this.http.delete(this.notesUrl, { search: params })
             .toPromise()
             .then(response => {
                 console.log(
-                    `note with id ${id} removed, response`, response);
+                    `note with id ${_id} removed, response`, response);
                 this.readNotes();
             });
     }

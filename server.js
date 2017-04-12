@@ -26,7 +26,7 @@ db.open(function(){
     console.log("mongo db is opened!");
 });
 
-db.collection('notes', function(error, notes) {
+db.collection('mynotes', function(error, notes) {
     db.notes = notes;
 });
 
@@ -45,11 +45,13 @@ app.post("/notes", function(req,res) {
 app.delete("/notes", function(req,res) {
 
     var id = new ObjectID(req.query.id);
+
     db.notes.remove({_id: id}, function(err){
         if (err) {
             console.log(err);
             res.send("Failed");
         } else {
+            console.log('success');
             res.send("Success");
         }
     })

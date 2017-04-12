@@ -18,11 +18,17 @@ var NotesList = (function () {
         this.notesUrl = 'http://localhost:8080/notes';
         this.readNotes();
     }
+    NotesList.prototype.add = function () {
+        if (!this.text) {
+            return;
+        }
+        var note = { text: this.text };
+        this.addNote(note);
+    };
     NotesList.prototype.readNotes = function () {
         var _this = this;
         this.getNotes().then(function (notes) {
             _this.notes = notes;
-            console.log(notes);
         });
     };
     NotesList.prototype.getNotes = function () {
@@ -30,14 +36,14 @@ var NotesList = (function () {
             .toPromise()
             .then(function (response) { return response.json(); });
     };
-    NotesList.prototype.removeNote = function (id) {
+    NotesList.prototype.removeNote = function (_id) {
         var _this = this;
         var params = new http_1.URLSearchParams();
-        params.set('id', id);
+        params.set('id', _id);
         this.http.delete(this.notesUrl, { search: params })
             .toPromise()
             .then(function (response) {
-            console.log("note with id " + id + " removed, response", response);
+            console.log("note with id " + _id + " removed, response", response);
             _this.readNotes();
         });
     };
@@ -54,7 +60,7 @@ var NotesList = (function () {
 NotesList = __decorate([
     core_1.Component({
         selector: 'notes-list',
-        template: "\n        <div class=\"notes__create\">\n            <div class=\"notes___create__row\">\n                <textarea class=\"notes___create__textarea\" [(ngModel)]=\"text\" ></textarea>\n            </div>\n            <div class=\"notes___create__row\">\n                <button class=\"notes___create__button\" type=\"button\" (click)=\"addNote()\">Add</button>\n            </div>\n        </div>\n        <ul class=\"notes__list\">\n            <li *ngFor=\"let note of notes \" class=\"notes__item\">\n                <div class=\"notes__item__text\"> {{note.text}}</div>\n                <div class=\"notes__item__button\">\n                    <button type=\"button\" (click)=\"removeNote(note.id)\" ></button>\n                </div>\n            </li>\n        </ul>\n    "
+        template: "\n        <div class=\"notes__create\">\n            <div class=\"notes___create__row\">\n                <textarea class=\"notes___create__textarea\" [(ngModel)]=\"text\" ></textarea>\n            </div>\n            <div class=\"notes___create__row\">\n                <button [disabled]=\"!text\" class=\"notes___create__button\" type=\"button\" (click)=\"add()\">Add</button>\n            </div>\n        </div>\n        <ul class=\"notes__list\">\n            <li *ngFor=\"let note of notes \" class=\"notes__item\">\n                <div class=\"notes__item__text\"> {{note.text}}</div>\n                <div class=\"notes__item__button\">\n                    <button type=\"button\" (click)=\"removeNote(note._id)\" >delete</button>\n                </div>\n            </li>\n        </ul>\n    "
     }),
     __metadata("design:paramtypes", [http_1.Http])
 ], NotesList);
