@@ -76,6 +76,4 @@ export class NotesList{
                 this.readNotes();
             } );
     }
-
-
 }
