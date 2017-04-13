@@ -40,7 +40,7 @@ export class NotesList{
         if (!this.text) {
             return;
         }
-        let note = { text: this.text }
+        let note = { text: this.text };
         this.addNote(note);
         this.text = '';
     }
