@@ -30,6 +30,9 @@ db.collection('mynotes', function(error, notes) {
     db.notes = notes;
 });
 
+db.collection('sections', function(error, sections) {
+    db.sections = sections;
+});
 
 app.get("/notes", function(req,res) {
     db.notes.find(req.query).toArray(function(err, items) {
@@ -57,6 +60,11 @@ app.delete("/notes", function(req,res) {
     })
 });
 
+app.get("/sections", function(req,res) {
+    db.sections.find(req.query).toArray(function(err, items) {
+        res.send(items);
+    });
+});
 
 app.listen(8080);
 

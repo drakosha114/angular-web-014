@@ -13,6 +13,9 @@ var app_component_1 = require("./app.component");
 var notes_title_component_1 = require("./notes.title.component");
 var notes_list_component_1 = require("./notes.list.component");
 var http_1 = require("@angular/http");
+var sections_component_1 = require("./sections.component");
+var sections_title_component_1 = require("./sections.title.component");
+var sections_list_component_1 = require("./sections.list.component");
 var AppModule = (function () {
     function AppModule() {
     }
@@ -21,7 +24,7 @@ var AppModule = (function () {
 AppModule = __decorate([
     core_1.NgModule({
         imports: [platform_browser_1.BrowserModule, forms_1.FormsModule, http_1.HttpModule],
-        declarations: [app_component_1.AppComponent, notes_title_component_1.NotesTitle, notes_list_component_1.NotesList],
+        declarations: [app_component_1.AppComponent, notes_title_component_1.NotesTitle, notes_list_component_1.NotesList, sections_component_1.SectionsComponent, sections_title_component_1.SectionsTitleComponent, sections_list_component_1.SectionList],
         bootstrap: [app_component_1.AppComponent]
     })
 ], AppModule);
