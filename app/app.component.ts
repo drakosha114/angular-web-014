@@ -1,6 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { NotesTitle } from './notes.title.component';
-import { NotesList } from './notes.list.component';
+import { NotesComponent } from './notes.component';
 import { CurrentSectionService } from './current.section.service';
 import { Subscription }   from 'rxjs/Subscription';
 
@@ -14,8 +13,7 @@ import { Subscription }   from 'rxjs/Subscription';
             </div>
             <div class="row">
                 <div class="col-md-8">
-                    <notes-title></notes-title>
-                    <notes-list></notes-list>
+                    <app-notes></app-notes>
                 </div>
                 <div class="col-md-4">
                     <app-sections></app-sections>

@@ -10,77 +10,30 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
-var http_1 = require("@angular/http");
-require("rxjs/add/operator/toPromise");
 var NotesList = (function () {
-    function NotesList(http) {
-        this.http = http;
-        this.notesUrl = 'http://localhost:8080/notes';
+    function NotesList() {
+        this.deleteNote = new core_1.EventEmitter();
     }
-    NotesList.prototype.ngOnInit = function () {
-        this.readNotes();
-    };
-    NotesList.prototype.ngOnChanges = function () {
-        this.readNotes();
-    };
-    NotesList.prototype.add = function () {
-        if (!this.text) {
-            return;
-        }
-        var note = {
-            text: this.text,
-            section: this.section
-        };
-        this.addNote(note);
-        this.text = '';
-    };
-    NotesList.prototype.readNotes = function () {
-        var _this = this;
-        this.getNotes().then(function (notes) {
-            _this.notes = notes;
-            console.log(_this.section);
-        });
-    };
-    NotesList.prototype.getNotes = function () {
-        var params = new http_1.URLSearchParams();
-        params.set('section', this.section);
-        return this.http.get(this.notesUrl)
-            .toPromise()
-            .then(function (response) { return response.json(); });
-    };
-    NotesList.prototype.removeNote = function (id) {
-        var _this = this;
-        var params = new http_1.URLSearchParams();
-        params.set('id', id);
-        this.http.delete(this.notesUrl, { search: params })
-            .toPromise()
-            .then(function (response) {
-            console.log("note with id " + id + " removed, response", response);
-            _this.readNotes();
-        });
-    };
-    NotesList.prototype.addNote = function (note) {
-        var _this = this;
-        console.log(note);
-        this.http.post(this.notesUrl, note).toPromise()
-            .then(function (response) {
-            console.log("note sent, response", response);
-            _this.readNotes();
-        });
+    ;
+    NotesList.prototype.removeNote = function (noteID) {
+        this.deleteNote.emit(noteID);
     };
     return NotesList;
 }());
 __decorate([
-    core_1.Input(),
-    __metadata("design:type", String)
-], NotesList.prototype, "section", void 0);
+    core_1.Input('notes'),
+    __metadata("design:type", Array)
+], NotesList.prototype, "notes", void 0);
+__decorate([
+    core_1.Output(),
+    __metadata("design:type", core_1.EventEmitter)
+], NotesList.prototype, "deleteNote", void 0);
 NotesList = __decorate([
     core_1.Component({
         selector: 'notes-list',
-        template: "\n        <div class=\"notes__create\">\n            <div class=\"notes___create__row\">\n                <textarea class=\"notes___create__textarea\" [(ngModel)]=\"text\" ></textarea>\n            </div>\n            <div class=\"notes___create__row\">\n                <button [disabled]=\"!text\" class=\"notes___create__button\" type=\"button\" (click)=\"add()\">Add</button>\n            </div>\n        </div>\n        <ul class=\"notes__list\">\n            <li *ngFor=\"let note of notes \" class=\"notes__item\">\n                <div class=\"notes__item__text\"> {{note.text}}</div>\n                <div class=\"notes__item__text\"> {{note.section}}</div>\n                <div class=\"notes__item__button\">\n                    <button type=\"button\" (click)=\"removeNote(note._id)\" >delete</button>\n                </div>\n            </li>\n        </ul>\n    "
+        template: "\n        <ul class=\"notes__list\">\n            <li *ngFor=\"let note of notes \" class=\"notes__item\">\n                <div class=\"notes__item__text\"> {{note.text}}</div>\n                <div class=\"notes__item__text\"> {{note.section}}</div>\n                <div class=\"notes__item__button\">\n                    <button type=\"button\" (click)=\"removeNote(note._id)\" >delete</button>\n                </div>\n            </li>\n        </ul>\n    "
     }),
-    __metadata("design:paramtypes", [http_1.Http])
+    __metadata("design:paramtypes", [])
 ], NotesList);
 exports.NotesList = NotesList;
-//TODO: передать активную секцию 
 //# sourceMappingURL=notes.list.component.js.map

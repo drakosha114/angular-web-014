@@ -11,11 +11,13 @@ import { SectionList } from './sections.list.component';
 import { SectionsAddSection } from './sections.addSection.component';
 import { CurrentSectionService } from './current.section.service';
 import { SectionsService } from './sections.service';
+import { NotesComponent } from './notes.component';
+import { NotesAddNoteComponent } from './notes.addNote.component';
 
 
 @NgModule({
     imports:      [ BrowserModule, FormsModule, HttpModule ],
-    declarations: [ AppComponent, NotesTitle, NotesList, SectionsComponent,  SectionsTitleComponent, SectionList, SectionsAddSection ],
+    declarations: [ AppComponent, NotesTitle, NotesList, SectionsComponent,  SectionsTitleComponent, SectionList, SectionsAddSection, NotesComponent, NotesAddNoteComponent ],
     providers: [ CurrentSectionService, SectionsService ],
     bootstrap:    [ AppComponent ]
 })

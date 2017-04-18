@@ -30,7 +30,7 @@ var AppComponent = (function () {
 AppComponent = __decorate([
     core_1.Component({
         selector: 'my-app',
-        template: "\n        <div class=\"container\">\n            <div class=\"page-header\">\n                <h1>Notes application</h1>\n            </div>\n            <div class=\"row\">\n                <div class=\"col-md-8\">\n                    <notes-title></notes-title>\n                    <notes-list></notes-list>\n                </div>\n                <div class=\"col-md-4\">\n                    <app-sections></app-sections>\n                </div>\n            </div>\n           \n        </div>\n    ",
+        template: "\n        <div class=\"container\">\n            <div class=\"page-header\">\n                <h1>Notes application</h1>\n            </div>\n            <div class=\"row\">\n                <div class=\"col-md-8\">\n                    <app-notes></app-notes>\n                </div>\n                <div class=\"col-md-4\">\n                    <app-sections></app-sections>\n                </div>\n            </div>\n           \n        </div>\n    ",
         providers: [current_section_service_1.CurrentSectionService]
     }),
     __metadata("design:paramtypes", [current_section_service_1.CurrentSectionService])

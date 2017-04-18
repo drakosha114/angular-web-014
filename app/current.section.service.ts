@@ -11,4 +11,8 @@ export class CurrentSectionService {
     changeCurrentSection(section: string) {
         this.currentSection.next(section);
     }
+
+    getCurrentSection(): Subject<string>{
+        return this.currentSection;
+    }
 }
