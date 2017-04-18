@@ -8,9 +8,15 @@ import { HttpModule }    from '@angular/http';
 import { SectionsComponent } from './sections.component';
 import { SectionsTitleComponent } from './sections.title.component';
 import { SectionList } from './sections.list.component';
+import { SectionsAddSection } from './sections.addSection.component';
+import { CurrentSectionService } from './current.section.service';
+import { SectionsService } from './sections.service';
+
+
 @NgModule({
     imports:      [ BrowserModule, FormsModule, HttpModule ],
-    declarations: [ AppComponent, NotesTitle, NotesList, SectionsComponent,  SectionsTitleComponent, SectionList ],
+    declarations: [ AppComponent, NotesTitle, NotesList, SectionsComponent,  SectionsTitleComponent, SectionList, SectionsAddSection ],
+    providers: [ CurrentSectionService, SectionsService ],
     bootstrap:    [ AppComponent ]
 })
 export class AppModule {}

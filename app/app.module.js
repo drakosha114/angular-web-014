@@ -16,6 +16,9 @@ var http_1 = require("@angular/http");
 var sections_component_1 = require("./sections.component");
 var sections_title_component_1 = require("./sections.title.component");
 var sections_list_component_1 = require("./sections.list.component");
+var sections_addSection_component_1 = require("./sections.addSection.component");
+var current_section_service_1 = require("./current.section.service");
+var sections_service_1 = require("./sections.service");
 var AppModule = (function () {
     function AppModule() {
     }
@@ -24,7 +27,8 @@ var AppModule = (function () {
 AppModule = __decorate([
     core_1.NgModule({
         imports: [platform_browser_1.BrowserModule, forms_1.FormsModule, http_1.HttpModule],
-        declarations: [app_component_1.AppComponent, notes_title_component_1.NotesTitle, notes_list_component_1.NotesList, sections_component_1.SectionsComponent, sections_title_component_1.SectionsTitleComponent, sections_list_component_1.SectionList],
+        declarations: [app_component_1.AppComponent, notes_title_component_1.NotesTitle, notes_list_component_1.NotesList, sections_component_1.SectionsComponent, sections_title_component_1.SectionsTitleComponent, sections_list_component_1.SectionList, sections_addSection_component_1.SectionsAddSection],
+        providers: [current_section_service_1.CurrentSectionService, sections_service_1.SectionsService],
         bootstrap: [app_component_1.AppComponent]
     })
 ], AppModule);

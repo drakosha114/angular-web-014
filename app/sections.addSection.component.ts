@@ -1,33 +1,34 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { Http, URLSearchParams, QueryEncoder } from '@angular/http';
+import { Component, Output, EventEmitter } from '@angular/core';
 import 'rxjs/add/operator/map';
-import { Observable } from 'rxjs/Observable';
-
-interface Section {
-    title: string
-}
 
 @Component({
     selector: 'app-sections-addSection',
-    template: ``
+    template: `
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Add new section" [(ngModel)]="text">
+                    <span class="input-group-btn">
+                        <button  [disabled]="!text" (click)="add()" class="btn btn-primary" type="button">Add section!</button>
+                    </span>                    
+                </div>
+            </div>  
+        </div>`
 })
 export class SectionsAddSection {
 
-    private sectionsURl: string = 'http://localhost:8080/notes';
-    section: Section;
     private text: string;
 
-    constructor (private http: Http) {
+    @Output() addNewSection: EventEmitter<string> =
+        new EventEmitter<string>();
+
+    constructor () {
         this.text = '';
     }
 
-    textareaOnKeyupHandler (text:string):void {
-
+    add () {
+        this.addNewSection.emit(this.text);
+        this.text = '';
     }
-    addSection () {
-
-    }
-
-
 
 }

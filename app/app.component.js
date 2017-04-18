@@ -10,22 +10,30 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
+var current_section_service_1 = require("./current.section.service");
 var AppComponent = (function () {
-    function AppComponent() {
+    function AppComponent(currentSectionService) {
+        var _this = this;
+        this.currentSectionService = currentSectionService;
+        this.subscription = currentSectionService.currentSection$.subscribe(function (section) {
+            _this.section = section;
+        });
     }
     AppComponent.prototype.ngOnInit = function () {
+        this.currentSectionService.changeCurrentSection('work');
     };
-    AppComponent.prototype.setSection = function (section) {
-        this.section = section;
+    AppComponent.prototype.ngOnDestroy = function () {
+        this.subscription.unsubscribe();
     };
     return AppComponent;
 }());
 AppComponent = __decorate([
     core_1.Component({
         selector: 'my-app',
-        template: "\n        <div class=\"container\">\n            <div class=\"page-header\">\n                <h1>Notes application</h1>\n            </div>\n            <div class=\"row\">\n                <div class=\"col-md-8\">\n                    <notes-title></notes-title>\n                    <notes-list [section]=\"section\"></notes-list>\n                </div>\n                <div class=\"col-md-4\">\n                    <app-sections [setSection]=\"setSection\"></app-sections>\n                </div>\n            </div>\n           \n        </div>\n    "
+        template: "\n        <div class=\"container\">\n            <div class=\"page-header\">\n                <h1>Notes application</h1>\n            </div>\n            <div class=\"row\">\n                <div class=\"col-md-8\">\n                    <notes-title></notes-title>\n                    <notes-list></notes-list>\n                </div>\n                <div class=\"col-md-4\">\n                    <app-sections></app-sections>\n                </div>\n            </div>\n           \n        </div>\n    ",
+        providers: [current_section_service_1.CurrentSectionService]
     }),
-    __metadata("design:paramtypes", [])
+    __metadata("design:paramtypes", [current_section_service_1.CurrentSectionService])
 ], AppComponent);
 exports.AppComponent = AppComponent;
 //# sourceMappingURL=app.component.js.map

@@ -66,6 +66,11 @@ app.get("/sections", function(req,res) {
     });
 });
 
+app.post("/sections", function(req, res){
+   db.sections.insert(req.body);
+   res.end();
+});
+
 app.listen(8080);
 
   

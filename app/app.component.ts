@@ -1,6 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { NotesTitle } from './notes.title.component';
 import { NotesList } from './notes.list.component';
+import { CurrentSectionService } from './current.section.service';
+import { Subscription }   from 'rxjs/Subscription';
+
 
 @Component({
     selector: 'my-app',
@@ -12,27 +15,34 @@ import { NotesList } from './notes.list.component';
             <div class="row">
                 <div class="col-md-8">
                     <notes-title></notes-title>
-                    <notes-list [section]="section"></notes-list>
+                    <notes-list></notes-list>
                 </div>
                 <div class="col-md-4">
-                    <app-sections [setSection]="setSection"></app-sections>
+                    <app-sections></app-sections>
                 </div>
             </div>
            
         </div>
-    `
+    `,
+    providers: [ CurrentSectionService ]
 })
-export class AppComponent implements OnInit{
+export class AppComponent implements OnInit, OnDestroy{
 
-    section: string;
-    constructor() {
+    private section: string;
+    subscription: Subscription;
 
+    constructor(private currentSectionService: CurrentSectionService ) {
+        this.subscription = currentSectionService.currentSection$.subscribe((section) => {
+            this.section = section;
+        })
     }
+
     ngOnInit() {
-
+        this.currentSectionService.changeCurrentSection('work');
     }
-    setSection(section:string) {
-        this.section = section;
+
+    ngOnDestroy() {
+        this.subscription.unsubscribe();
     }
 
 }
