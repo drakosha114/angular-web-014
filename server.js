@@ -6,8 +6,9 @@ var bodyParser = require('body-parser');
 var Db = require('mongodb').Db;
 var Server = require('mongodb').Server;
 var ObjectID = require('mongodb').ObjectID;
+var root = __dirname + '/angular-web-014/..';
 
-app.use(express.static(path.join(__dirname)));
+app.use(express.static(root));
 app.use(session({
     secret: 'angular_tutorial',
     resave: true,
@@ -64,6 +65,10 @@ app.get("/sections", function(req,res) {
     db.sections.find(req.query).toArray(function(err, items) {
         res.send(items);
     });
+});
+
+app.get("*", function(req, res, next) {
+    res.sendFile('index.html', { root : root });
 });
 
 app.post("/sections", function(req, res){

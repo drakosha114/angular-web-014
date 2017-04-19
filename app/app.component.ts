@@ -1,28 +1,18 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CurrentSectionService } from './current.section.service';
 import { SectionsService } from './sections.service';
+import { NotesService } from './notes.service';
 import { Subscription }   from 'rxjs/Subscription';
-
 
 @Component({
     selector: 'my-app',
     template: `
+        <app-navigation></app-navigation>
         <div class="container">
-            <div class="page-header">
-                <h1>Notes application</h1>
-            </div>
-            <div class="row">
-                <div class="col-md-8">
-                    <app-notes></app-notes>
-                </div>
-                <div class="col-md-4">
-                    <app-sections></app-sections>
-                </div>
-            </div>
-           
+            <router-outlet></router-outlet>           
         </div>
     `,
-    providers: [ CurrentSectionService, SectionsService ]
+    providers: [ CurrentSectionService, SectionsService, NotesService ]
 })
 export class AppComponent implements OnInit, OnDestroy{
 
@@ -32,7 +22,6 @@ export class AppComponent implements OnInit, OnDestroy{
     constructor(private currentSectionService: CurrentSectionService ) {
         this.subscription = currentSectionService.currentSection$.subscribe((section) => {
             this.section = section;
-            console.log(section);
         })
     }
 
@@ -45,3 +34,17 @@ export class AppComponent implements OnInit, OnDestroy{
     }
 
 }
+/*
+* <div class="page-header">
+ <h1>Notes application</h1>
+ </div>
+ <div class="row">
+ <div class="col-md-8">
+ <app-notes></app-notes>
+ </div>
+ <div class="col-md-4">
+ <app-sections></app-sections>
+ </div>
+ </div>
+*
+* */

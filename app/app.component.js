@@ -12,13 +12,13 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var current_section_service_1 = require("./current.section.service");
 var sections_service_1 = require("./sections.service");
+var notes_service_1 = require("./notes.service");
 var AppComponent = (function () {
     function AppComponent(currentSectionService) {
         var _this = this;
         this.currentSectionService = currentSectionService;
         this.subscription = currentSectionService.currentSection$.subscribe(function (section) {
             _this.section = section;
-            console.log(section);
         });
     }
     AppComponent.prototype.ngOnInit = function () {
@@ -32,10 +32,24 @@ var AppComponent = (function () {
 AppComponent = __decorate([
     core_1.Component({
         selector: 'my-app',
-        template: "\n        <div class=\"container\">\n            <div class=\"page-header\">\n                <h1>Notes application</h1>\n            </div>\n            <div class=\"row\">\n                <div class=\"col-md-8\">\n                    <app-notes></app-notes>\n                </div>\n                <div class=\"col-md-4\">\n                    <app-sections></app-sections>\n                </div>\n            </div>\n           \n        </div>\n    ",
-        providers: [current_section_service_1.CurrentSectionService, sections_service_1.SectionsService]
+        template: "\n        <app-navigation></app-navigation>\n        <div class=\"container\">\n            <router-outlet></router-outlet>           \n        </div>\n    ",
+        providers: [current_section_service_1.CurrentSectionService, sections_service_1.SectionsService, notes_service_1.NotesService]
     }),
     __metadata("design:paramtypes", [current_section_service_1.CurrentSectionService])
 ], AppComponent);
 exports.AppComponent = AppComponent;
+/*
+* <div class="page-header">
+ <h1>Notes application</h1>
+ </div>
+ <div class="row">
+ <div class="col-md-8">
+ <app-notes></app-notes>
+ </div>
+ <div class="col-md-4">
+ <app-sections></app-sections>
+ </div>
+ </div>
+*
+* */ 
 //# sourceMappingURL=app.component.js.map

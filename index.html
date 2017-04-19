@@ -2,6 +2,7 @@
   <head>
     <title>Angular QuickStart</title>
     <meta charset="UTF-8">
+    <base href="/">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="app/style.css">
@@ -15,6 +16,10 @@
     </script>
   </head>
   <body>
-    <my-app>Loading...</my-app>
+    <my-app>
+      <div class="loader">
+        <img class="loader__image" src="images/loading.gif" width="100" height="100">
+      </div>
+    </my-app>
   </body>
 </html>
