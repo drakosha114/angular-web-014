@@ -17,8 +17,7 @@ interface Section {
                 <app-sections-addSection (addNewSection)="addSection($event)"></app-sections-addSection>
             </div>
             <app-section-list (changeCurrentSection)="changeSection($event)"  [Sections]="sections" [section]="currentSection"></app-section-list>
-        </div>`,
-    providers: [ SectionsService, CurrentSectionService ]
+        </div>`
 })
 export class SectionsComponent implements  OnInit, OnDestroy {
 

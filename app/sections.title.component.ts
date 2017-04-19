@@ -11,4 +11,5 @@ import {Component, Input} from '@angular/core';
 })
 export class SectionsTitleComponent {
     @Input('title') sectionTitle:string;
+
 }

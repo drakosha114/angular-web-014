@@ -3,25 +3,23 @@ import { NotesService } from './notes.service';
 import { CurrentSectionService } from './current.section.service';
 import { Subscription }  from 'rxjs/Subscription';
 
-import { NotesList } from './notes.list.component';
-import { NotesAddNoteComponent } from './notes.addNote.component';
-import { NotesTitle } from './notes.title.component';
-
 interface Note {
     title: string,
-    id: string,
-    section: string
+    _id?: string,
+    section: string,
+    body: string
 }
 
 @Component({
     selector: 'app-notes',
     template: `
         <div class="n__notes">
-            <notes-title [title]="title" [section]="currentSection"></notes-title>
+            <app-notes-addNote (addNewNote)="addNote($event)" [section]="currentSection"></app-notes-addNote>
+            <notes-title [title]="title" [section]="currentSection"></notes-title>            
             <notes-list [notes]="notes" (deleteNote)="removeNote($event)"></notes-list>
         </div>
     `,
-    providers: [ NotesService, CurrentSectionService ]
+    providers: [ NotesService ]
 })
 export class NotesComponent implements OnInit,OnDestroy{
 
@@ -34,7 +32,6 @@ export class NotesComponent implements OnInit,OnDestroy{
     constructor (private currentSectionService: CurrentSectionService, private notesService: NotesService) {
 
         this.subscriptionCurrentSection = currentSectionService.currentSection$.subscribe( (nextSection: string) => {
-            console.log(nextSection);
             this.currentSection = nextSection;
             this._readNotes();
         });
@@ -59,7 +56,19 @@ export class NotesComponent implements OnInit,OnDestroy{
         this.notesService.readNotes(this.currentSection);
     }
 
+    private _addNewNote(note:Note) {
+        this.notesService.addNote(note, this.currentSection);
+    }
+
+    private _removeNote(id: string, section: string) {
+        this.notesService.removeNote(id, section);
+    }
+
     removeNote (noteId: string) {
-        console.log(noteId);
+        this._removeNote(noteId, this.currentSection);
+    }
+
+    addNote (note: Note) {
+        this._addNewNote(note);
     }
 }

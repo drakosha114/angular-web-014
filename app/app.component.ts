@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { NotesComponent } from './notes.component';
 import { CurrentSectionService } from './current.section.service';
+import { SectionsService } from './sections.service';
 import { Subscription }   from 'rxjs/Subscription';
 
 
@@ -22,7 +22,7 @@ import { Subscription }   from 'rxjs/Subscription';
            
         </div>
     `,
-    providers: [ CurrentSectionService ]
+    providers: [ CurrentSectionService, SectionsService ]
 })
 export class AppComponent implements OnInit, OnDestroy{
 
@@ -32,6 +32,7 @@ export class AppComponent implements OnInit, OnDestroy{
     constructor(private currentSectionService: CurrentSectionService ) {
         this.subscription = currentSectionService.currentSection$.subscribe((section) => {
             this.section = section;
+            console.log(section);
         })
     }
 

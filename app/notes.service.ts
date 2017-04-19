@@ -7,7 +7,8 @@ import { Observable } from 'rxjs/Observable';
 interface Note {
     title: string,
     id?: string,
-    section: string
+    section: string,
+    body: string
 }
 
 @Injectable()
@@ -33,31 +34,28 @@ export class NotesService {
         let params: URLSearchParams = new URLSearchParams();
         params.set('section', currentSection);
 
-        return this.http.get(this.notesUrl).map(response => response.json() as Note[]);
+        return this.http.get(this.notesUrl, {search: params}).map(response => response.json() as Note[]);
 
     }
 
-/*
-    removeNote(id:string) {
+    removeNote(id:string, section: string) {
+
         let params: URLSearchParams = new URLSearchParams();
         params.set('id', id);
-        this.http.delete(this.notesUrl, { search: params })
-            .toPromise()
-            .then(response => {
-                console.log(
-                    `note with id ${id} removed, response`, response);
-                this.readNotes();
-            });
+
+        this.http.delete(this.notesUrl, { search: params }).subscribe(()=>{
+            this.readNotes(section)
+        });
+
     }
 
-    addNote(note:Note) {
-        console.log(note);
-        this.http.post(this.notesUrl, note).toPromise()
-            .then(response => {
-                console.log("note sent, response", response);
-                this.readNotes();
-            } );
+    addNote(note:Note, section:string) {
+
+        this.http.post(this.notesUrl, note).subscribe(() => {
+            this.readNotes(section)
+        });
+
     }
-    */
+
 
 }

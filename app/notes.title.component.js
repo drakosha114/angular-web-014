@@ -26,7 +26,7 @@ __decorate([
 NotesTitle = __decorate([
     core_1.Component({
         selector: 'notes-title',
-        template: "<h1 class=\"n__title\">{{title}} <small>from {{section}} section</small></h1>"
+        template: "<h1 class=\"n__title\">{{title}} <small *ngIf=\"currentSection\">from {{currentSection}} section</small></h1>"
     })
 ], NotesTitle);
 exports.NotesTitle = NotesTitle;

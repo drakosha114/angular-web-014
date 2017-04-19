@@ -11,12 +11,14 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var current_section_service_1 = require("./current.section.service");
+var sections_service_1 = require("./sections.service");
 var AppComponent = (function () {
     function AppComponent(currentSectionService) {
         var _this = this;
         this.currentSectionService = currentSectionService;
         this.subscription = currentSectionService.currentSection$.subscribe(function (section) {
             _this.section = section;
+            console.log(section);
         });
     }
     AppComponent.prototype.ngOnInit = function () {
@@ -31,7 +33,7 @@ AppComponent = __decorate([
     core_1.Component({
         selector: 'my-app',
         template: "\n        <div class=\"container\">\n            <div class=\"page-header\">\n                <h1>Notes application</h1>\n            </div>\n            <div class=\"row\">\n                <div class=\"col-md-8\">\n                    <app-notes></app-notes>\n                </div>\n                <div class=\"col-md-4\">\n                    <app-sections></app-sections>\n                </div>\n            </div>\n           \n        </div>\n    ",
-        providers: [current_section_service_1.CurrentSectionService]
+        providers: [current_section_service_1.CurrentSectionService, sections_service_1.SectionsService]
     }),
     __metadata("design:paramtypes", [current_section_service_1.CurrentSectionService])
 ], AppComponent);

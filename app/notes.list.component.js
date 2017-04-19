@@ -31,7 +31,8 @@ __decorate([
 NotesList = __decorate([
     core_1.Component({
         selector: 'notes-list',
-        template: "\n        <ul class=\"notes__list\">\n            <li *ngFor=\"let note of notes \" class=\"notes__item\">\n                <div class=\"notes__item__text\"> {{note.text}}</div>\n                <div class=\"notes__item__text\"> {{note.section}}</div>\n                <div class=\"notes__item__button\">\n                    <button type=\"button\" (click)=\"removeNote(note._id)\" >delete</button>\n                </div>\n            </li>\n        </ul>\n    "
+        template: "\n        <ul class=\"notes__list\">\n            <li *ngFor=\"let note of notes \" class=\"notes__item\">\n                <div class=\"page-header\">\n                    <h3 class=\"notes__item__title\">{{note.title}} <small><span class=\"label label-primary notes__item__section\">{{note.section}}</span></small></h3>\n                </div>\n                <div class=\"notes__item__body\">{{note.body}}</div>\n                <div class=\"notes__item__button\">\n                    <button type=\"button\" (click)=\"removeNote(note._id)\" >delete</button>\n                </div>\n            </li>\n        </ul>\n    ",
+        styleUrls: ['app/notes-list.component.css']
     }),
     __metadata("design:paramtypes", [])
 ], NotesList);
