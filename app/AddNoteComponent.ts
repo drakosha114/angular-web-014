@@ -19,7 +19,9 @@ interface Note {
                 <div class="page-header">
                     <h1>Add new Note</h1>
                 </div>
+                <!--
                 <app-notes-addNote (addNewNote)="addNote($event)" [section]="currentSection"></app-notes-addNote>
+                -->
             </div>            
         </div>
     `,
@@ -27,7 +29,7 @@ interface Note {
     providers: []
 })
 export class AddNoteComponent implements OnInit, OnDestroy{
-
+/*
     private currentSection: Subject<string>;
 
     constructor(private notesService: NotesService, private currentSectionsService: CurrentSectionService) {
@@ -47,5 +49,14 @@ export class AddNoteComponent implements OnInit, OnDestroy{
     }
     addNote(note: Note) {
         this._addNewNote(note);
+    }
+    */
+
+    ngOnInit(){
+
+    }
+
+    ngOnDestroy(){
+
     }
 }

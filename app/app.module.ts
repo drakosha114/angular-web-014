@@ -2,18 +2,9 @@ import { NgModule }      from '@angular/core';
 import { RouterModule }   from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
+import { NotesModule } from './notes/notes.module';
 import { AppComponent }   from './app.component';
-import  { NotesTitle } from './notes.title.component';
-import { NotesList } from './notes.list.component';
 import { HttpModule }    from '@angular/http';
-import { SectionsComponent } from './sections.component';
-import { SectionsTitleComponent } from './sections.title.component';
-import { SectionList } from './sections.list.component';
-import { SectionsAddSection } from './sections.addSection.component';
-import { CurrentSectionService } from './current.section.service';
-import { SectionsService } from './sections.service';
-import { NotesComponent } from './notes.component';
-import { NotesAddNoteComponent } from './notes.addNote.component';
 import { SectionComponent } from './SectionComponent';
 import { AddNoteComponent } from './AddNoteComponent';
 import { EditNoteComponent } from './EditNoteComponent';
@@ -23,11 +14,11 @@ import { AppNavbarComponent } from './AppNavbarComponent';
 
 const routerParameters = [{
     path: 'section',
-    component: MainPageComponent
+    component: SectionComponent
 },{
     path: 'section/:id',
     component: SectionComponent
-}, {
+},{
     path: 'addNote',
     component: AddNoteComponent
 },{
@@ -40,22 +31,18 @@ const routerParameters = [{
 },{
     path: '**',
     component: NotFoundComponent
-}]
+}];
 
 @NgModule({
-    imports: [ BrowserModule,
+    imports: [
+        BrowserModule,
         FormsModule,
         HttpModule,
-        RouterModule.forRoot(routerParameters)],
-    declarations: [ AppComponent,
-        NotesTitle,
-        NotesList,
-        SectionsComponent,
-        SectionsTitleComponent,
-        SectionList,
-        SectionsAddSection,
-        NotesComponent,
-        NotesAddNoteComponent,
+        NotesModule,
+        RouterModule.forRoot(routerParameters)
+    ],
+    declarations: [
+        AppComponent,
         SectionComponent,
         AddNoteComponent,
         EditNoteComponent,
@@ -63,8 +50,6 @@ const routerParameters = [{
         MainPageComponent,
         AppNavbarComponent
     ],
-    providers: [ CurrentSectionService,
-        SectionsService ],
     bootstrap: [ AppComponent ]
 })
 export class AppModule {}

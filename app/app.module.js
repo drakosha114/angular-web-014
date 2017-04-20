@@ -10,18 +10,9 @@ var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
 var platform_browser_1 = require("@angular/platform-browser");
 var forms_1 = require("@angular/forms");
+var notes_module_1 = require("./notes/notes.module");
 var app_component_1 = require("./app.component");
-var notes_title_component_1 = require("./notes.title.component");
-var notes_list_component_1 = require("./notes.list.component");
 var http_1 = require("@angular/http");
-var sections_component_1 = require("./sections.component");
-var sections_title_component_1 = require("./sections.title.component");
-var sections_list_component_1 = require("./sections.list.component");
-var sections_addSection_component_1 = require("./sections.addSection.component");
-var current_section_service_1 = require("./current.section.service");
-var sections_service_1 = require("./sections.service");
-var notes_component_1 = require("./notes.component");
-var notes_addNote_component_1 = require("./notes.addNote.component");
 var SectionComponent_1 = require("./SectionComponent");
 var AddNoteComponent_1 = require("./AddNoteComponent");
 var EditNoteComponent_1 = require("./EditNoteComponent");
@@ -30,7 +21,7 @@ var MainPageComponent_1 = require("./MainPageComponent");
 var AppNavbarComponent_1 = require("./AppNavbarComponent");
 var routerParameters = [{
         path: 'section',
-        component: MainPageComponent_1.MainPageComponent
+        component: SectionComponent_1.SectionComponent
     }, {
         path: 'section/:id',
         component: SectionComponent_1.SectionComponent
@@ -55,19 +46,15 @@ var AppModule = (function () {
 }());
 AppModule = __decorate([
     core_1.NgModule({
-        imports: [platform_browser_1.BrowserModule,
+        imports: [
+            platform_browser_1.BrowserModule,
             forms_1.FormsModule,
             http_1.HttpModule,
-            router_1.RouterModule.forRoot(routerParameters)],
-        declarations: [app_component_1.AppComponent,
-            notes_title_component_1.NotesTitle,
-            notes_list_component_1.NotesList,
-            sections_component_1.SectionsComponent,
-            sections_title_component_1.SectionsTitleComponent,
-            sections_list_component_1.SectionList,
-            sections_addSection_component_1.SectionsAddSection,
-            notes_component_1.NotesComponent,
-            notes_addNote_component_1.NotesAddNoteComponent,
+            notes_module_1.NotesModule,
+            router_1.RouterModule.forRoot(routerParameters)
+        ],
+        declarations: [
+            app_component_1.AppComponent,
             SectionComponent_1.SectionComponent,
             AddNoteComponent_1.AddNoteComponent,
             EditNoteComponent_1.EditNoteComponent,
@@ -75,8 +62,6 @@ AppModule = __decorate([
             MainPageComponent_1.MainPageComponent,
             AppNavbarComponent_1.AppNavbarComponent
         ],
-        providers: [current_section_service_1.CurrentSectionService,
-            sections_service_1.SectionsService],
         bootstrap: [app_component_1.AppComponent]
     })
 ], AppModule);

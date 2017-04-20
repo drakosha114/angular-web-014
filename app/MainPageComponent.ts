@@ -4,7 +4,7 @@ import { Component } from '@angular/core';
     selector: 'app-main',
     template: `
         <div class="page page__main">
-            main page
+            <app-notes></app-notes>
         </div>
     `
 })
