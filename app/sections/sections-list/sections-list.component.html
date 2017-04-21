@@ -1,0 +1,6 @@
+<ul class="list-group sections__list">
+    <li *ngFor="let section of sections" class="sections__list__item list-group-item" [ngClass]="{ active:section.title === activeSection }"
+        (click)="showSection(section.title)">
+        {{section.title}}
+    </li>
+</ul>

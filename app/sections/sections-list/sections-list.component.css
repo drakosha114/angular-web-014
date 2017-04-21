@@ -1,0 +1,6 @@
+.list-group.sections__list {
+    margin-bottom: 0;
+}
+.sections__list__item {
+    border-width: 1px 0;border-radius: 0;
+}

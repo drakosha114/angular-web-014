@@ -10,9 +10,10 @@ var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
 var platform_browser_1 = require("@angular/platform-browser");
 var forms_1 = require("@angular/forms");
-var notes_module_1 = require("./notes/notes.module");
-var app_component_1 = require("./app.component");
 var http_1 = require("@angular/http");
+var notes_module_1 = require("./notes/notes.module");
+var sections_module_1 = require("./sections/sections.module");
+var app_component_1 = require("./app.component");
 var SectionComponent_1 = require("./SectionComponent");
 var AddNoteComponent_1 = require("./AddNoteComponent");
 var EditNoteComponent_1 = require("./EditNoteComponent");
@@ -51,6 +52,7 @@ AppModule = __decorate([
             forms_1.FormsModule,
             http_1.HttpModule,
             notes_module_1.NotesModule,
+            sections_module_1.SectionsModule,
             router_1.RouterModule.forRoot(routerParameters)
         ],
         declarations: [

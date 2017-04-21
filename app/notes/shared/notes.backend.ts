@@ -9,7 +9,7 @@ import { Note } from './note.model';
 @Injectable()
 export class NotesBackend {
 
-    private notesUrl = 'http://localhost:8080/notes';
+    private notesUrl:string = 'http://localhost:8080/notes';
 
     constructor(private http: Http) {}
 
@@ -39,11 +39,11 @@ export class NotesBackend {
 
     }
 
-    public addNote(note:Note)  {
+    public addNote(note:Note):Observable<any>  {
         return this.http.post(this.notesUrl, note);
     }
 
-    public deleteNote(id:string) {
+    public deleteNote(id:string):Observable<any> {
 
         let params: URLSearchParams = new URLSearchParams();
         params.set('id', id);

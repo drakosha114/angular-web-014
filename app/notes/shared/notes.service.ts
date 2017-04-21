@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Subject }    from 'rxjs/Subject';
-import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 
 import { Note } from './note.model';
@@ -13,7 +12,9 @@ export class NotesService {
 
     notes$ = this.notes.asObservable();
 
-    constructor (private notesBackend: NotesBackend) {}
+    constructor (private notesBackend: NotesBackend) {
+
+    }
 
     readNotes(category?:string) {
         this.notesBackend.getNotes(category).subscribe((Notes: Note[]) => {

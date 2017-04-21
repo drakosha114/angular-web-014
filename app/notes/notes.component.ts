@@ -2,8 +2,6 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription }  from 'rxjs/Subscription';
 
-import { Note } from './shared/note.model';
-
 @Component({
     selector: 'app-notes',
     templateUrl: 'app/notes/notes.component.html',

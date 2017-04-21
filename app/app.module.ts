@@ -2,9 +2,12 @@ import { NgModule }      from '@angular/core';
 import { RouterModule }   from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
-import { NotesModule } from './notes/notes.module';
-import { AppComponent }   from './app.component';
 import { HttpModule }    from '@angular/http';
+
+import { NotesModule } from './notes/notes.module';
+import { SectionsModule } from './sections/sections.module';
+
+import { AppComponent }   from './app.component';
 import { SectionComponent } from './SectionComponent';
 import { AddNoteComponent } from './AddNoteComponent';
 import { EditNoteComponent } from './EditNoteComponent';
@@ -39,6 +42,7 @@ const routerParameters = [{
         FormsModule,
         HttpModule,
         NotesModule,
+        SectionsModule,
         RouterModule.forRoot(routerParameters)
     ],
     declarations: [
