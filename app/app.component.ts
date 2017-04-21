@@ -1,15 +1,13 @@
 import { Component } from '@angular/core';
 
-
 @Component({
     selector: 'my-app',
     template: `
-        <app-navigation></app-navigation>
+        <app-navbar></app-navbar>
         <div class="container">
             <router-outlet></router-outlet>           
         </div>
-    `,
-    providers: [ ]
+    `
 })
 export class AppComponent {
 

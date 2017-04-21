@@ -35,6 +35,10 @@ db.collection('sections', function(error, sections) {
     db.sections = sections;
 });
 
+db.collection('users', function(error, users){
+    db.users = users;
+})
+
 app.get("/notes", function(req,res) {
     db.notes.find(req.query).toArray(function(err, items) {
         res.send(items);

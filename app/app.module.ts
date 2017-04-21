@@ -6,14 +6,22 @@ import { HttpModule }    from '@angular/http';
 
 import { NotesModule } from './notes/notes.module';
 import { SectionsModule } from './sections/sections.module';
+import { UserModule } from './user/user.module';
+import { PagesModule } from './pages/pages.module';
+import { NavbarModule } from './navbar/navbar.module';
 
 import { AppComponent }   from './app.component';
+
+import { RegisterViewComponent } from './pages/register-view/register-view.component';
+
+
+
 import { SectionComponent } from './SectionComponent';
 import { AddNoteComponent } from './AddNoteComponent';
 import { EditNoteComponent } from './EditNoteComponent';
 import { NotFoundComponent } from './NotFoundComponent';
 import { MainPageComponent } from './MainPageComponent';
-import { AppNavbarComponent } from './AppNavbarComponent';
+
 
 const routerParameters = [{
     path: 'section',
@@ -27,6 +35,9 @@ const routerParameters = [{
 },{
     path: 'editNote/:id',
     component: EditNoteComponent
+},{
+    path: 'register',
+    component: RegisterViewComponent
 },{
     path: '',
     redirectTo: '/section',
@@ -43,6 +54,9 @@ const routerParameters = [{
         HttpModule,
         NotesModule,
         SectionsModule,
+        UserModule,
+        PagesModule,
+        NavbarModule,
         RouterModule.forRoot(routerParameters)
     ],
     declarations: [
@@ -51,8 +65,7 @@ const routerParameters = [{
         AddNoteComponent,
         EditNoteComponent,
         NotFoundComponent,
-        MainPageComponent,
-        AppNavbarComponent
+        MainPageComponent
     ],
     bootstrap: [ AppComponent ]
 })

@@ -13,13 +13,16 @@ var forms_1 = require("@angular/forms");
 var http_1 = require("@angular/http");
 var notes_module_1 = require("./notes/notes.module");
 var sections_module_1 = require("./sections/sections.module");
+var user_module_1 = require("./user/user.module");
+var pages_module_1 = require("./pages/pages.module");
+var navbar_module_1 = require("./navbar/navbar.module");
 var app_component_1 = require("./app.component");
+var register_view_component_1 = require("./pages/register-view/register-view.component");
 var SectionComponent_1 = require("./SectionComponent");
 var AddNoteComponent_1 = require("./AddNoteComponent");
 var EditNoteComponent_1 = require("./EditNoteComponent");
 var NotFoundComponent_1 = require("./NotFoundComponent");
 var MainPageComponent_1 = require("./MainPageComponent");
-var AppNavbarComponent_1 = require("./AppNavbarComponent");
 var routerParameters = [{
         path: 'section',
         component: SectionComponent_1.SectionComponent
@@ -32,6 +35,9 @@ var routerParameters = [{
     }, {
         path: 'editNote/:id',
         component: EditNoteComponent_1.EditNoteComponent
+    }, {
+        path: 'register',
+        component: register_view_component_1.RegisterViewComponent
     }, {
         path: '',
         redirectTo: '/section',
@@ -53,6 +59,9 @@ AppModule = __decorate([
             http_1.HttpModule,
             notes_module_1.NotesModule,
             sections_module_1.SectionsModule,
+            user_module_1.UserModule,
+            pages_module_1.PagesModule,
+            navbar_module_1.NavbarModule,
             router_1.RouterModule.forRoot(routerParameters)
         ],
         declarations: [
@@ -61,8 +70,7 @@ AppModule = __decorate([
             AddNoteComponent_1.AddNoteComponent,
             EditNoteComponent_1.EditNoteComponent,
             NotFoundComponent_1.NotFoundComponent,
-            MainPageComponent_1.MainPageComponent,
-            AppNavbarComponent_1.AppNavbarComponent
+            MainPageComponent_1.MainPageComponent
         ],
         bootstrap: [app_component_1.AppComponent]
     })

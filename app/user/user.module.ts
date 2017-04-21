@@ -3,23 +3,24 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
-import { UserModule } from '../user/user.module';
-
-import { RegisterViewComponent } from './register-view/register-view.component';
+import { UserRegistrationComponent } from './user-registration/user-registration.component';
 
 @NgModule({
     imports: [
         BrowserModule,
         FormsModule,
-        HttpModule,
-        UserModule
+        HttpModule
     ],
     declarations: [
-        RegisterViewComponent
+        UserRegistrationComponent
     ],
     exports: [
-        RegisterViewComponent
+        UserRegistrationComponent
     ],
-    providers: []
+    providers: [
+
+    ]
 })
-export class PagesModule{}
+export class UserModule{
+
+}
