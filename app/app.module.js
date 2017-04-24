@@ -18,6 +18,7 @@ var pages_module_1 = require("./pages/pages.module");
 var navbar_module_1 = require("./navbar/navbar.module");
 var app_component_1 = require("./app.component");
 var register_view_component_1 = require("./pages/register-view/register-view.component");
+var app_ligin_view_component_1 = require("./pages/login-view/app.ligin-view.component");
 var SectionComponent_1 = require("./SectionComponent");
 var AddNoteComponent_1 = require("./AddNoteComponent");
 var EditNoteComponent_1 = require("./EditNoteComponent");
@@ -38,6 +39,9 @@ var routerParameters = [{
     }, {
         path: 'register',
         component: register_view_component_1.RegisterViewComponent
+    }, {
+        path: 'login',
+        component: app_ligin_view_component_1.LoginViewComponent
     }, {
         path: '',
         redirectTo: '/section',

@@ -7,7 +7,8 @@ import { UserRegistrationComponent } from './user-registration/user-registration
 import { UserService }  from './shared/user.service';
 import { UsersBackend } from "./shared/users.backend";
 import { EqualToValidatorDirective } from "./directives/user.equalToValidator.directive";
-import {CheckUniqueUserNameDirective} from "./directives/user.checkUniqueName-validator.directive";
+import { CheckUniqueUserNameDirective } from "./directives/user.checkUniqueName-validator.directive";
+import { UserLoginFormComponent } from "./user-login/app.user-login.component";
 
 @NgModule({
     imports: [
@@ -19,11 +20,13 @@ import {CheckUniqueUserNameDirective} from "./directives/user.checkUniqueName-va
         UserRegistrationComponent,
         EqualToValidatorDirective,
         CheckUniqueUserNameDirective,
+        UserLoginFormComponent
     ],
     exports: [
         UserRegistrationComponent,
         EqualToValidatorDirective,
-        CheckUniqueUserNameDirective
+        CheckUniqueUserNameDirective,
+        UserLoginFormComponent
     ],
     providers: [
         UserService,

@@ -19,11 +19,12 @@
                     [(ngModel)]="user.name"
                     required
                     validateUniqueUserName
-                    minlength="3"
-                    maxlength="15"
                 >
-                <span class="help-block" *ngIf="name.errors && name.touched">
+                <span class="help-block" *ngIf="name.errors && name.value.length < 3 && name.touched">
                     This is required field
+                </span>
+                <span class="help-block" *ngIf="name.errors && name.errors.validateUniqueUserName && name.dirty">
+                    Please select other user name.
                 </span>
             </div>
 

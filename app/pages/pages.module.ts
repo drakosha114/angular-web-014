@@ -6,6 +6,7 @@ import { HttpModule } from '@angular/http';
 import { UserModule } from '../user/user.module';
 
 import { RegisterViewComponent } from './register-view/register-view.component';
+import { LoginViewComponent } from "./login-view/app.ligin-view.component";
 
 @NgModule({
     imports: [
@@ -15,10 +16,12 @@ import { RegisterViewComponent } from './register-view/register-view.component';
         UserModule
     ],
     declarations: [
-        RegisterViewComponent
+        RegisterViewComponent,
+        LoginViewComponent
     ],
     exports: [
-        RegisterViewComponent
+        RegisterViewComponent,
+        LoginViewComponent
     ],
     providers: []
 })

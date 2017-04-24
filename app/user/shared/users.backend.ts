@@ -45,7 +45,4 @@ export class UsersBackend {
 
         return this.http.get(this.checkUniqueUserUrl, {search: params}).map(responce => responce.json() as boolean);
     }
-
-
-
 }

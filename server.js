@@ -135,8 +135,9 @@ app.delete('/users', function(req, res){
 
 });
 
-app.get('users/checkUserUnique', function(req, res){
+app.get('/users/checkUserUnique', function(req, res){
     db.users.find(req.query).toArray(function (err, items) {
+
         if(items.length > 0) {
             res.send(false);
         } else {

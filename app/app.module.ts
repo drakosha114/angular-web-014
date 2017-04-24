@@ -13,15 +13,13 @@ import { NavbarModule } from './navbar/navbar.module';
 import { AppComponent }   from './app.component';
 
 import { RegisterViewComponent } from './pages/register-view/register-view.component';
-
-
+import { LoginViewComponent } from "./pages/login-view/app.ligin-view.component";
 
 import { SectionComponent } from './SectionComponent';
 import { AddNoteComponent } from './AddNoteComponent';
 import { EditNoteComponent } from './EditNoteComponent';
 import { NotFoundComponent } from './NotFoundComponent';
 import { MainPageComponent } from './MainPageComponent';
-
 
 const routerParameters = [{
     path: 'section',
@@ -38,6 +36,9 @@ const routerParameters = [{
 },{
     path: 'register',
     component: RegisterViewComponent
+},{
+    path: 'login',
+    component: LoginViewComponent
 },{
     path: '',
     redirectTo: '/section',
