@@ -1,46 +1,140 @@
 <div class="panel panel-primary">
     <div class="panel-heading">User registration form</div>
     <div class="panel-body">
-        <form class="css-form" name="userForm" #userForm="ngForm" (ngSubmit)="onSubmit()" >
-            <div class="form-group">
-                <label for="userName">Name</label>
-                <input type="text" class="form-control" id="userName" name="userName" placeholder="Name"
-                       #name="ngModel" [(ngModel)]="user.name">
+        <div class="alert alert-success" *ngIf="responseStatus">
+            <button type="button" class="close" (click)="closeAlert()" ><span aria-hidden="true">&times;</span></button>
+            <strong>Congratulations!</strong> Your profile is successfully saved!
+        </div>
+        <form class="css-form" name="userForm" #userForm="ngForm" (ngSubmit)="onSubmit()" novalidate>
+
+            <div class="form-group" [ngClass]="{'has-error': name.errors && name.touched}">
+                <label for="userName" class="control-label">Name</label>
+                <input
+                    type="text"
+                    class="form-control"
+                    id="userName"
+                    name="userName"
+                    placeholder="Name"
+                    #name="ngModel"
+                    [(ngModel)]="user.name"
+                    required
+                    validateUniqueUserName
+                    minlength="3"
+                    maxlength="15"
+                >
+                <span class="help-block" *ngIf="name.errors && name.touched">
+                    This is required field
+                </span>
             </div>
-            <div class="form-group">
-                <label for="dateOfBirth">Date of Birth</label>
-                <input type="text" class="form-control" id="dateOfBirth" name="userDateOfBirth" placeholder="Date of Birth"
-                       #name="ngModel" [(ngModel)]="user.name">
+
+            <div class="form-group" [ngClass]="{'has-error': dateOfBirth.errors && dateOfBirth.touched}">
+                <label for="dateOfBirth" class="control-label">Date of Birth</label>
+                <input
+                    type="text"
+                    class="form-control"
+                    id="dateOfBirth"
+                    name="userDateOfBirth"
+                    placeholder="Date of Birth"
+                    #dateOfBirth="ngModel"
+                    [(ngModel)]="user.dateOfBirth"
+                    required
+                    pattern="[0-9][0-9]\.[0-1][0-9]\.[1-2][0-9][0-9][0-9]"
+
+                >
+                <span class="help-block" *ngIf="dateOfBirth.errors && dateOfBirth.errors.pattern && dateOfBirth.touched">
+                    Date of birth should be in format dd.mm.yyyy
+                </span>
+
             </div>
+
             <div class="form-group">
                 <div class="checkbox">
                     <label>
-                        <input type="checkbox" name="subscribe" [(ngModel)]="user.subscribe">
+                        <input
+                            type="checkbox"
+                            name="subscribe"
+                            #subscribe="ngModel"
+                            [(ngModel)]="user.subscribe"
+                        >
                         Subscribe for newsletters
                     </label>
                 </div>
             </div>
-            <div class="form-group">
-                <label for="email">Email</label>
-                <input type="email" class="form-control" id="email" name="userEmail" placeholder="Email"
-                       #name="ngModel" [(ngModel)]="user.name">
-            </div>
-            <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" class="form-control" id="password"
-                       name="userPassword" placeholder="Username"
-                       #name="ngModel" [(ngModel)]="user.name">
-            </div>
-            <div class="form-group">
-                <label for="password2">Password 2</label>
-                <input type="password" class="form-control" id="password2"
-                       name="userPassword2" placeholder="Username"
-                       #name="ngModel" [(ngModel)]="user.name">
-            </div>
-            <div class="form-group text-right">
-                <button type="submit" class="btn btn-success">Submit</button>
-            </div>
-        </form>
 
+            <div class="form-group" *ngIf="user.subscribe" [ngClass]="{'has-error': email.errors && email.touched}">
+                <label for="email" class="control-label">Email</label>
+                <input
+                     type="email"
+                     class="form-control"
+                     id="email"
+                     name="userEmail"
+                     placeholder="Email"
+                     #email="ngModel"
+                     required
+                     [(ngModel)]="user.email"
+                     pattern="[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)"
+                >
+                <span class="help-block" *ngIf="email.errors && email.errors.pattern && email.touched">
+                     This is don't valid email address
+                </span>
+            </div>
+
+            <div class="form-group" [ngClass]="{'has-error': pass.errors && pass.touched}">
+                <label for="password" class="control-label">Password</label>
+                <input
+                     type="password"
+                     class="form-control"
+                     id="password"
+                     name="userPassword"
+                     placeholder="Password"
+                     #pass="ngModel"
+                     required
+                     minlength="6"
+                     maxlength="12"
+                     [(ngModel)]="user.password"
+                >
+                <span class="help-block" *ngIf="pass.errors && pass.errors.minlength &&pass.touched">
+                    Passwords should match more from 6 symbols
+                </span>
+                <span class="help-block" *ngIf="pass.errors && pass.errors.maxlength &&pass.touched">
+                    Passwords should match less from 12 symbols
+                </span>
+            </div>
+
+            <div class="form-group" [ngClass]="{'has-error': pass1.errors && pass1.touched}">
+                <label for="password2" class="control-label">Password 2</label>
+                <input
+                     type="password"
+                     class="form-control"
+                     id="password2"
+                     name="userPassword2"
+                     placeholder="Retype password"
+                     required
+                     #pass1="ngModel"
+                     validateEqual="userPassword"
+                     [(ngModel)]="user.password2"
+                >
+                <span class="help-block" *ngIf="pass1.errors && pass1.errors.validateEqual && pass1.touched">
+                    Passwords should match
+                </span>
+            </div>
+
+            <div class="form-group text-right">
+                <button
+                    type="reset"
+                    class="btn btn-default"
+                >
+                    Reset changes
+                </button>
+                <button
+                    type="submit"
+                    [disabled]="!userForm.valid"
+                    class="btn btn-primary"
+                >
+                    Submit
+                </button>
+            </div>
+
+        </form>
     </div>
 </div>

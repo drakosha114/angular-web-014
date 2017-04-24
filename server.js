@@ -37,7 +37,7 @@ db.collection('sections', function(error, sections) {
 
 db.collection('users', function(error, users){
     db.users = users;
-})
+});
 
 app.get("/notes", function(req,res) {
     db.notes.find(req.query).toArray(function(err, items) {
@@ -71,14 +71,84 @@ app.get("/sections", function(req,res) {
     });
 });
 
-app.get("*", function(req, res, next) {
-    res.sendFile('index.html', { root : root });
-});
 
 app.post("/sections", function(req, res){
    db.sections.insert(req.body);
    res.end();
 });
+
+app.delete('/sections', function (req,res) {
+
+    var id = new ObjectID(req.query.id);
+
+    db.sections.remove({_id : id}, function (err) {
+
+        if(err) {
+            console.log('error');
+            res.send('Failed');
+        } else {
+            console.log('success');
+            res.send('Success');
+        }
+    });
+});
+
+app.get('/sections/checkSectionUnique', function (req, res) {
+    db.sections.find(req.query).toArray(function (err, items) {
+        if (items.length > 0) {
+            res.send(false);
+        } else {
+            res.send(true);
+        }
+    })
+});
+
+app.get('/users', function(req, res){
+    db.users.find(req.query).toArray(function (err, items) {
+        res.send(items);
+    })
+});
+
+app.post('/users', function(req,res){
+    db.users.insert(req.body, function (resp) {
+        req.session.userName = req.body.name;
+        res.end();
+    });
+
+});
+
+app.delete('/users', function(req, res){
+
+    var id = new ObjectID(req.query.body);
+
+    db.users.delete({ _id: id }, function (err) {
+
+        if(err) {
+            console.log('error');
+            res.send('Failed');
+        } else {
+            console.log('success');
+            res.send('Success');
+        }
+
+    });
+
+});
+
+app.get('users/checkUserUnique', function(req, res){
+    db.users.find(req.query).toArray(function (err, items) {
+        if(items.length > 0) {
+            res.send(false);
+        } else {
+            res.send(true);
+        }
+    })
+});
+
+app.get("*", function(req, res, next) {
+    res.sendFile('index.html', { root : root });
+});
+
 
 app.listen(8080);
 

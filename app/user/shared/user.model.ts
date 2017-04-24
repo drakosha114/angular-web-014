@@ -4,5 +4,5 @@ export interface User {
     password2: string;
     subscribe: boolean;
     email: string;
-    dateOfBirth: Date;
+    dateOfBirth: string;
 }
