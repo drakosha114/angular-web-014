@@ -9,11 +9,8 @@ import { Router } from "@angular/router";
         <div class="container">
             <router-outlet></router-outlet>           
         </div>
-    `,
-    providers: [ UserLoginService ]
+    `
 })
 export class AppComponent {
-    constructor (private userLoginService: UserLoginService, private router: Router){
 
-    }
 }
