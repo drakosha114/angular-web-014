@@ -14,19 +14,21 @@ import { AppComponent }   from './app.component';
 
 import { RegisterViewComponent } from './pages/register-view/register-view.component';
 import { LoginViewComponent } from "./pages/login-view/app.ligin-view.component";
+import { SectionsViewComponent } from "./pages/sections-view/app.sections-view.component";
+import { EditProfileViewComponent } from './pages/editProfile-view/app.editProfile-view.component';
 
-import { SectionComponent } from './SectionComponent';
+
 import { AddNoteComponent } from './AddNoteComponent';
 import { EditNoteComponent } from './EditNoteComponent';
 import { NotFoundComponent } from './NotFoundComponent';
-import { MainPageComponent } from './MainPageComponent';
+
 
 const routerParameters = [{
     path: 'section',
-    component: SectionComponent
+    component: SectionsViewComponent
 },{
     path: 'section/:id',
-    component: SectionComponent
+    component: SectionsViewComponent
 },{
     path: 'addNote',
     component: AddNoteComponent
@@ -39,6 +41,9 @@ const routerParameters = [{
 },{
     path: 'login',
     component: LoginViewComponent
+},{
+    path: 'editProfile',
+    component: EditProfileViewComponent
 },{
     path: '',
     redirectTo: '/section',
@@ -62,11 +67,9 @@ const routerParameters = [{
     ],
     declarations: [
         AppComponent,
-        SectionComponent,
         AddNoteComponent,
         EditNoteComponent,
-        NotFoundComponent,
-        MainPageComponent
+        NotFoundComponent
     ],
     bootstrap: [ AppComponent ]
 })

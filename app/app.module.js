@@ -19,17 +19,17 @@ var navbar_module_1 = require("./navbar/navbar.module");
 var app_component_1 = require("./app.component");
 var register_view_component_1 = require("./pages/register-view/register-view.component");
 var app_ligin_view_component_1 = require("./pages/login-view/app.ligin-view.component");
-var SectionComponent_1 = require("./SectionComponent");
+var app_sections_view_component_1 = require("./pages/sections-view/app.sections-view.component");
+var app_editProfile_view_component_1 = require("./pages/editProfile-view/app.editProfile-view.component");
 var AddNoteComponent_1 = require("./AddNoteComponent");
 var EditNoteComponent_1 = require("./EditNoteComponent");
 var NotFoundComponent_1 = require("./NotFoundComponent");
-var MainPageComponent_1 = require("./MainPageComponent");
 var routerParameters = [{
         path: 'section',
-        component: SectionComponent_1.SectionComponent
+        component: app_sections_view_component_1.SectionsViewComponent
     }, {
         path: 'section/:id',
-        component: SectionComponent_1.SectionComponent
+        component: app_sections_view_component_1.SectionsViewComponent
     }, {
         path: 'addNote',
         component: AddNoteComponent_1.AddNoteComponent
@@ -42,6 +42,9 @@ var routerParameters = [{
     }, {
         path: 'login',
         component: app_ligin_view_component_1.LoginViewComponent
+    }, {
+        path: 'editProfile',
+        component: app_editProfile_view_component_1.EditProfileViewComponent
     }, {
         path: '',
         redirectTo: '/section',
@@ -70,11 +73,9 @@ AppModule = __decorate([
         ],
         declarations: [
             app_component_1.AppComponent,
-            SectionComponent_1.SectionComponent,
             AddNoteComponent_1.AddNoteComponent,
             EditNoteComponent_1.EditNoteComponent,
-            NotFoundComponent_1.NotFoundComponent,
-            MainPageComponent_1.MainPageComponent
+            NotFoundComponent_1.NotFoundComponent
         ],
         bootstrap: [app_component_1.AppComponent]
     })

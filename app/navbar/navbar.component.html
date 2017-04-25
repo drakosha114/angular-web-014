@@ -9,13 +9,17 @@
             </button>
             <a class="navbar-brand" routerLink="/">Notes Application</a>
         </div>
-
-
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="navbar-nav navbar-right nav text-right">
+            <ul *ngIf="!isLoggedIn" class="navbar-nav navbar-right nav text-right">
                 <li><a routerLink="/register">Register</a></li>
                 <li><a routerLink="/login">Login</a></li>
-                <li><a routerLink="/addNote">Add New Note</a></li>
+            </ul>
+            <form  *ngIf="isLoggedIn" class="navbar-form navbar-right">
+                <button type="button" class="btn bg-primary" (click)="logOut()">Logout</button>
+            </form>
+            <ul *ngIf="isLoggedIn" class="navbar-nav navbar-right nav text-right">
+                <li><a routerLink="/addNote">Add Note</a></li>
+                <li><a routerLink="/editProfile">Edit profile</a></li>
             </ul>
         </div>
     </div>

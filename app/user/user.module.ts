@@ -9,6 +9,7 @@ import { UsersBackend } from "./shared/users.backend";
 import { EqualToValidatorDirective } from "./directives/user.equalToValidator.directive";
 import { CheckUniqueUserNameDirective } from "./directives/user.checkUniqueName-validator.directive";
 import { UserLoginFormComponent } from "./user-login/app.user-login.component";
+import { UserLoginService } from "./shared/user.login.service";
 
 @NgModule({
     imports: [
@@ -30,7 +31,8 @@ import { UserLoginFormComponent } from "./user-login/app.user-login.component";
     ],
     providers: [
         UserService,
-        UsersBackend
+        UsersBackend,
+        UserLoginService
     ]
 })
 export class UserModule{

@@ -4,12 +4,15 @@ import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map';
 
 import { User } from './user.model';
+import { UserLogIn } from './user-login.model';
 
 @Injectable()
 export class UsersBackend {
 
     private usersUrl: string = 'http://localhost:8080/users';
     private checkUniqueUserUrl: string = "http://localhost:8080/users/checkUserUnique";
+    private loginUserUrl: string = 'http://localhost:8080/login';
+    private logoutUserUrl: string = 'http://localhost:8080/logout';
 
     constructor (private http: Http) {
 
@@ -44,5 +47,24 @@ export class UsersBackend {
         params.set('name', name);
 
         return this.http.get(this.checkUniqueUserUrl, {search: params}).map(responce => responce.json() as boolean);
+    }
+
+    public loginUser(user: UserLogIn):Observable<User> {
+
+        let params: URLSearchParams = new URLSearchParams();
+        params.set('name', user.name);
+        params.set('password', user.password);
+
+        return this.http.post(this.loginUserUrl, user).map((responce) => {
+            try {
+                return responce.json() as User;
+            } catch(err) {
+                return null;
+            }
+        });
+    }
+
+    public logoutUser():Observable<any> {
+        return this.http.post(this.loginUserUrl, {});
     }
 }

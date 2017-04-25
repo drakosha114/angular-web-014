@@ -16,7 +16,9 @@ export class CheckUniqueUserNameDirective implements Validator {
 
     validate(c: AbstractControl): Promise<{[key: string]: any}> {
         return new Promise((resolve)=>{
-            var name = c.value;
+
+            let name = c.value;
+
             this.userService.checkUserUnique(name).subscribe((resp)=>{
                 if ( name && resp === false ) {
                     c.setErrors({validateUniqueUserName: resp});

@@ -33,10 +33,11 @@ export class UserRegistrationComponent{
     }
 
     onSubmit() {
+
         this.userService.addUser(this.user).subscribe(()=>{
-            this.initUserStartParameters();
             this.responseStatus = true;
-        })
+        });
+
     }
 
     closeAlert() {

@@ -146,6 +146,31 @@ app.get('/users/checkUserUnique', function(req, res){
     })
 });
 
+app.post('/login', function(req, res){
+
+    console.log(req.body);
+
+
+    db.users.find({name: req.body.name, password: req.body.password}).toArray(function(err, items){
+        console.log(items);
+
+
+
+        if(items.length > 0) {
+            req.session.userName = req.body.name;
+            res.send(items[0]);
+        } else {
+            console.log('asdasd');
+            res.send(null);
+        }
+    });
+});
+
+app.post('/logout', function(req, res){
+    req.session.userName = null;
+    res.end();
+});
+
 app.get("*", function(req, res, next) {
     res.sendFile('index.html', { root : root });
 });
