@@ -89,8 +89,9 @@ app.post("/sections", function(req, res){
     db.users.find({name: userName}).toArray( function(err, items){
         var userSection = items[0].sections || [];
         userSection.push(req.body);
-        db.users.update({user: userName}, {$set: {sections: userSection}}, {multi:true});
-        res.end();
+        db.users.update({user: userName}, {$set: {sections: userSection}},function() {
+            res.end();
+        });
     });
 });
 
@@ -104,11 +105,18 @@ app.delete('/sections', function (req,res) {
         userSection = userSection.filter(function(item){
             return item.title !== title;
         });
-        db.users.update({user: userName}, {$set: {sections: userSection}}, {multi:true});
-        res.end();
+        db.users.update({user: userName}, {$set: {sections: userSection}},function() {
+            res.end();
+        });
+
     });
 });
-
+app.post("/sections/replace", function(req,res) {
+    var userName = req.session.userName || "demo";
+    db.users.update({userName:userName},{$set:{sections:req.body}},function() {
+            res.end();
+    });
+});
 app.get('/sections/checkSectionUnique', function (req, res) {
 
     var title = req.body.title;
