@@ -9,6 +9,9 @@ var ObjectID = require('mongodb').ObjectID;
 var root = __dirname + '/angular-web-014/..';
 var MongoStore = require('connect-mongo/es5')(session);
 
+function setUserQuery (req) {
+    return req.query.userName = req.session.userName || "demo";
+}
 
 app.use(express.static(root));
 app.use(session({

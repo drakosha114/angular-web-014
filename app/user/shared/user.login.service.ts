@@ -52,7 +52,6 @@ export class UserLoginService {
     public isLogged(): Promise <boolean> {
         return new Promise((resolve) => {
             this.usersBackend.isLogged().subscribe((resp)=> {
-                console.log(resp);
                 if(resp) {
                     this.isLoggedIn.next(true);
                     resolve(true);

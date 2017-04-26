@@ -72,7 +72,7 @@ export class UsersBackend {
 
     public isLogged():Observable<boolean> {
         return this.http.post(this.isUserLoggedUrl, {}).map((responce) => {
-            return responce.json().data;
+            return responce.json();
         });
     }
 }
