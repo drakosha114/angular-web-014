@@ -48,13 +48,14 @@ db.collection('users', function(error, users){
 });
 
 app.get("/notes", function(req,res) {
-
+    setUserQuery(req);
     db.notes.find(req.query).toArray(function(err, items) {
         res.send(items);
     });
 });
 
 app.post("/notes", function(req,res) {
+    req.body.user = req.session.userName || "demo";
     db.notes.insert(req.body);
     res.end();
 });
@@ -71,45 +72,59 @@ app.delete("/notes", function(req,res) {
             console.log('success');
             res.send("Success");
         }
-    })
+    });
 });
 
 app.get("/sections", function(req,res) {
-    db.sections.find(req.query).toArray(function(err, items) {
-        res.send(items);
+    var userName = req.session.userName || "demo";
+    db.users.find({name: userName}).toArray( function(err, items){
+        var user = items[0];
+        res.send(user.sections||[]);
     });
 });
 
 
 app.post("/sections", function(req, res){
-   db.sections.insert(req.body);
-   res.end();
+    var userName = req.session.userName || "demo";
+    db.users.find({name: userName}).toArray( function(err, items){
+        var userSection = items[0].sections || [];
+        userSection.push(req.body);
+        db.users.update({user: userName}, {$set: {sections: userSection}}, {multi:true});
+        res.end();
+    });
 });
 
 app.delete('/sections', function (req,res) {
 
-    var id = new ObjectID(req.query.id);
+    var title = req.body.title;
+    var userName = req.session.userName || "demo";
 
-    db.sections.remove({_id : id}, function (err) {
-
-        if(err) {
-            console.log('error');
-            res.send('Failed');
-        } else {
-            console.log('success');
-            res.send('Success');
-        }
+    db.users.find({name: userName}).toArray( function(err, items){
+        var userSection = items[0].sections || [];
+        userSection = userSection.filter(function(item){
+            return item.title !== title;
+        });
+        db.users.update({user: userName}, {$set: {sections: userSection}}, {multi:true});
+        res.end();
     });
 });
 
 app.get('/sections/checkSectionUnique', function (req, res) {
-    db.sections.find(req.query).toArray(function (err, items) {
-        if (items.length > 0) {
+
+    var title = req.body.title;
+    var userName = req.session.userName || "demo";
+    db.users.find({name: userName}).toArray( function(err, items){
+        var userSection = items[0].sections || [];
+        userSection = userSection.filter(function(item){
+            return item.title === title;
+        });
+        if (userSection.length > 0) {
             res.send(false);
         } else {
             res.send(true);
         }
-    })
+    });
+
 });
 
 app.get('/users', function(req, res){
@@ -182,11 +197,6 @@ app.post('/login/isLogged', function(req, res){
 });
 
 app.get("*", function(req, res, next) {
-    console.log(req.session.userName);
     res.sendFile('index.html', { root : root });
 });
-
-
 app.listen(8080);
-
-  
