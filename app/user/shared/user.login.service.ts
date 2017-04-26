@@ -15,7 +15,7 @@ export class UserLoginService {
     public loggedInUserStream$ = this.loggedInUser.asObservable();
 
     constructor(private usersBackend: UsersBackend) {
-
+        this.isLogged();
     }
 
     logIn(user: UserLogIn): Promise<boolean> {
@@ -32,9 +32,6 @@ export class UserLoginService {
                     this.loggedInUser.next(null);
                     resolve(false);
                 }
-
-
-
             });
         })
 
@@ -52,4 +49,19 @@ export class UserLoginService {
     }
 
 
+    public isLogged(): Promise <boolean> {
+        return new Promise((resolve) => {
+            this.usersBackend.isLogged().subscribe((resp)=> {
+                console.log(resp);
+                if(resp) {
+                    this.isLoggedIn.next(true);
+                    resolve(true);
+                } else {
+                    this.isLoggedIn.next(false);
+                    resolve(false);
+                }
+
+            })
+        })
+    }
 }

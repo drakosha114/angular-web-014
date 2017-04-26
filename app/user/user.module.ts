@@ -11,6 +11,7 @@ import { CheckUniqueUserNameDirective } from "./directives/user.checkUniqueName-
 import { UserLoginFormComponent } from "./user-login/app.user-login.component";
 import { UserLoginService } from "./shared/user.login.service";
 
+
 @NgModule({
     imports: [
         BrowserModule,
@@ -27,7 +28,8 @@ import { UserLoginService } from "./shared/user.login.service";
         UserRegistrationComponent,
         EqualToValidatorDirective,
         CheckUniqueUserNameDirective,
-        UserLoginFormComponent
+        UserLoginFormComponent,
+
     ],
     providers: [
         UserService,

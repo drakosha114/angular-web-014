@@ -7,9 +7,14 @@ var Db = require('mongodb').Db;
 var Server = require('mongodb').Server;
 var ObjectID = require('mongodb').ObjectID;
 var root = __dirname + '/angular-web-014/..';
+var MongoStore = require('connect-mongo/es5')(session);
+
 
 app.use(express.static(root));
 app.use(session({
+    store: new MongoStore({
+        url: 'mongodb://localhost:27017/angular_session'
+    }),
     secret: 'angular_tutorial',
     resave: true,
     saveUninitialized: true
@@ -40,6 +45,7 @@ db.collection('users', function(error, users){
 });
 
 app.get("/notes", function(req,res) {
+
     db.notes.find(req.query).toArray(function(err, items) {
         res.send(items);
     });
@@ -148,20 +154,13 @@ app.get('/users/checkUserUnique', function(req, res){
 
 app.post('/login', function(req, res){
 
-    console.log(req.body);
-
-
     db.users.find({name: req.body.name, password: req.body.password}).toArray(function(err, items){
-        console.log(items);
-
-
 
         if(items.length > 0) {
             req.session.userName = req.body.name;
             res.send(items[0]);
         } else {
-            console.log('asdasd');
-            res.send(null);
+           res.send(null);
         }
     });
 });
@@ -171,7 +170,16 @@ app.post('/logout', function(req, res){
     res.end();
 });
 
+app.post('/login/isLogged', function(req, res){
+    if (req.session.userName) {
+        res.send(true)
+    } else {
+        res.send(false)
+    }
+});
+
 app.get("*", function(req, res, next) {
+    console.log(req.session.userName);
     res.sendFile('index.html', { root : root });
 });
 

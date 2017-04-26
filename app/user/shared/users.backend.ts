@@ -13,6 +13,7 @@ export class UsersBackend {
     private checkUniqueUserUrl: string = "http://localhost:8080/users/checkUserUnique";
     private loginUserUrl: string = 'http://localhost:8080/login';
     private logoutUserUrl: string = 'http://localhost:8080/logout';
+    private isUserLoggedUrl: string = 'http://localhost:8080/login/isLogged';
 
     constructor (private http: Http) {
 
@@ -65,6 +66,13 @@ export class UsersBackend {
     }
 
     public logoutUser():Observable<any> {
-        return this.http.post(this.loginUserUrl, {});
+
+        return this.http.post(this.logoutUserUrl, {});
+    }
+
+    public isLogged():Observable<boolean> {
+        return this.http.post(this.isUserLoggedUrl, {}).map((responce) => {
+            return responce.json().data;
+        });
     }
 }

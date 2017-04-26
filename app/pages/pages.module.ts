@@ -11,6 +11,7 @@ import { RegisterViewComponent } from './register-view/register-view.component';
 import { LoginViewComponent } from "./login-view/app.ligin-view.component";
 import { SectionsViewComponent } from "./sections-view/app.sections-view.component";
 import { EditProfileViewComponent } from "./editProfile-view/app.editProfile-view.component";
+import {PagesRouterGuardService} from "./shared/pages.router-guard.service";
 
 
 @NgModule({
@@ -26,14 +27,19 @@ import { EditProfileViewComponent } from "./editProfile-view/app.editProfile-vie
         RegisterViewComponent,
         LoginViewComponent,
         SectionsViewComponent,
-        EditProfileViewComponent
+        EditProfileViewComponent,
+        PagesRouterGuardService
+
     ],
     exports: [
         RegisterViewComponent,
         LoginViewComponent,
         SectionsViewComponent,
-        EditProfileViewComponent
+        EditProfileViewComponent,
+        PagesRouterGuardService
     ],
-    providers: []
+    providers: [
+
+    ]
 })
 export class PagesModule{}

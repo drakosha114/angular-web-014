@@ -41,9 +41,8 @@ export class UserLoginFormComponent implements OnInit, OnDestroy{
     }
 
     private userAutorizationSuccess() {
-        //this.router.navigateByUrl("/");
-        //this.loggedInUser = true;
-
+        this.router.navigateByUrl("/");
+        this.loggedInUser = true;
     }
 
     private userAutorizationError(){
@@ -51,7 +50,7 @@ export class UserLoginFormComponent implements OnInit, OnDestroy{
     }
 
     private userLogout() {
-        //this.router.navigateByUrl("/");
+        this.loggedInUser = false;
     }
 
     onSubmit(): void {
